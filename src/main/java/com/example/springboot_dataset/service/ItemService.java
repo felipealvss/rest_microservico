@@ -23,4 +23,23 @@ public class ItemService {
                 .map(ResponseEntity :: ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    public ResponseEntity<List<Item>> findByNameContainingIgnoreCase(String name){
+        List<Item> items = itemRepository.findByNameContainingIgnoreCase(name);
+        return ResponseEntity.ok(items);
+    }
+
+    public ResponseEntity<List<Item>> findByCategory(String category){
+        List<Item> items = itemRepository.findByCategory(category);
+        return ResponseEntity.ok(items);
+    }
+
+    public ResponseEntity<List<Item>> findByPriceBetween(Double min, Double max){
+        List<Item> items = itemRepository.findByPriceBetween(min, max);
+        return ResponseEntity.ok(items);
+    }
+
+    public Item createItem(Item item){
+        return itemRepository.save(item);
+    }
 }
